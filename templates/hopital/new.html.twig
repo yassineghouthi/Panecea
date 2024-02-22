@@ -1,0 +1,35 @@
+
+{% extends 'back.html.twig' %}
+
+{% block title %}New Hopital{% endblock %}
+
+{% block body %}
+    <div style="display: flex; align-items: center; justify-content: center; margin-top: 80px;">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Create new Hopital</h4>
+                <p class="card-description"></p>
+                {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+                <div class="form-group">
+                    <label for="exampleInputUsername1">Nom</label>
+                    {{ form_widget(form.Nom, {'attr': {'class': 'form-control custom-input'}}) }}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputUsername1">Localisation</label>
+                    {{ form_widget(form.Localisation, {'attr': {'class': 'form-control custom-input'}}) }}
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputUsername1">Images</label>
+                    {{ form_widget(form.images, {'attr': {'class': 'form-control custom-input'}}) }}
+
+                </div>
+                <button class="btn btn-primary mr-2">Submit</button>
+                {{ form_end(form) }}
+
+                <a href="{{ path('app_hopital_index') }}" class="btn btn-info mt-2 text-white">Go to back</a>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Urgence{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Edit Urgence</h4>
+                        <p class="card-description"></p>
+                        {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+                        <div class="form-group">
+                            <label for="exampleInputDescription">Description</label>
+                            {{ form_widget(form.Description, {'attr': {'class': 'form-control form-control-lg'}}) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputNombreLit">NombreLit</label>
+                            {{ form_widget(form.NombreLit, {'attr': {'class': 'form-control form-control-lg'}}) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputSpecialite">Specialite</label>
+                            {{ form_widget(form.Specialite, {'attr': {'class': 'form-control form-control-lg'}}) }}
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-lg mr-2">Update</button>
+                            <a href="{{ path('app_hopital_index_user') }}" class="btn btn-info btn-lg mt-2 text-white">Back</a>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

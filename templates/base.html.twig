@@ -10,7 +10,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		
 		<!-- Title -->
-        <title>Panacea</title>
+        <title>{% block title %}Panacea {% endblock %}</title>
 		
 		<!-- Favicon -->
         <link rel="icon" href={{ asset("front/img/favicon.png") }}>
@@ -20,6 +20,9 @@
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href={{ asset("front/css/bootstrap.min.css")}}>
+		<link href= {{ asset("back/vendor/bootstrap/css/bootstrap.min.css") }} rel="stylesheet">
+		<link href= {{ asset("back/vendor/bootstrap-icons/bootstrap-icons.css") }} rel="stylesheet">
+		<link href= {{ asset("back/vendor/boxicons/css/boxicons.min.css") }} rel="stylesheet">
 		<!-- Nice Select CSS -->
 		<link rel="stylesheet" href={{ asset("front/css/nice-select.css")}}>
 		<!-- Font Awesome CSS -->
@@ -111,7 +114,7 @@
         <ul class="nav menu">
             <li class="active"><a href="index.html">Accueil</a></li>
             <li><a href="#">Médecins</a></li>
-            <li><a href="#">Hôpitaux</a></li>
+            <li><a href="{{ path('app_hopital_index_user') }}">Hôpitaux</a></li>
             <li><a href="#">Laboratoires</a></li>
             <li><a href="#">Pharmacies</a></li>
         </ul>
@@ -130,7 +133,7 @@
 <!--/ Fin En-tête interne -->
 </header>
 <!-- Fin Zone d'en-tête -->
-
+{% block body %}
 <!-- Zone de diapositives -->
 <section class="slider">
     <div class="hero-slider">
@@ -913,7 +916,7 @@
 			</div>
 		</section>
 		<!-- /End Newsletter Area -->
-		
+		{% endblock %}
 		<!-- Footer Area -->
 		<footer id="footer" class="footer ">
 			<!-- Footer Top -->
@@ -1042,5 +1045,6 @@
 		<script src={{ asset("front/js/bootstrap.min.js")}}></script>
 		<!-- Main JS -->
 		<script src={{ asset("front/js/main.js")}}></script>
+		<script src= {{ asset("back/vendor/bootstrap/js/bootstrap.bundle.min.js") }}></script>
     </body>
 </html>

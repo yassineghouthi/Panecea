@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Work</title>
+
+  <title>{% block title %} Work {% endblock %}</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -71,7 +72,7 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src= {{ asset("back/img/yassin.jpg") }} alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">Y. Messai</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">Yassine ghouthi</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -141,11 +142,18 @@
       </li><!-- End Admin Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " href="index.html">
+        <a class="nav-link " href="{{ path('app_hopital_index') }}">
           <i class="ri-hotel-bed-line"></i>
           <span>Hopital</span>
         </a>
       </li><!-- End Hopital Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_reservation_index') }}">
+          <i class="ri-list-check-3"></i> <!-- Add your reservation icon class here -->
+          <span>Reservation</span>
+        </a>
+      </li>
 
       <li class="nav-item">
         <a class="nav-link " href="index.html">
@@ -178,7 +186,34 @@
       
 
   </aside><!-- End Sidebar-->
+  <div id="content-body" class="content-body">
+    {% block body %}
+    {% endblock %}
+  </div>
 
+  <style>
+    /* CSS styling for the content body */
+    .content-body {
+      position: absolute;
+      top: 50px;
+      left: 300px; /* Adjust this value based on your sidebar width */
+      width: calc(100% - 250px); /* Adjust this value based on your sidebar width */
+      padding-top: 80px; /* Adjust based on your header's height */
+      padding-left: 20px;
+      background-color: #f8f9fa; /* Example background color */
+      box-sizing: border-box;
+      height: 100vh; /* Adjust to fill the height of the viewport */
+      overflow-y: auto; /* Add scroll if content overflows */
+    }
+
+    /* Adjustments for responsiveness */
+    @media (max-width: 992px) {
+      .content-body {
+        left: 0;
+        width: 100%;
+      }
+    }
+  </style>
  
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
