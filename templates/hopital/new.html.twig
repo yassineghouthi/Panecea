@@ -1,4 +1,3 @@
-
 {% extends 'back.html.twig' %}
 
 {% block title %}New Hopital{% endblock %}
@@ -10,19 +9,51 @@
                 <h4 class="card-title">Create new Hopital</h4>
                 <p class="card-description"></p>
                 {{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+
                 <div class="form-group">
-                    <label for="exampleInputUsername1">Nom</label>
+                    <label for="exampleInputNom">Nom</label>
                     {{ form_widget(form.Nom, {'attr': {'class': 'form-control custom-input'}}) }}
+                    {% if form_errors(form.Nom) %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(form.Nom) }}
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputUsername1">Localisation</label>
+                    <label for="exampleInputLocalisation">Localisation</label>
                     {{ form_widget(form.Localisation, {'attr': {'class': 'form-control custom-input'}}) }}
-
+                    {% if form_errors(form.Localisation) %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(form.Localisation) }}
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputUsername1">Images</label>
-                    {{ form_widget(form.images, {'attr': {'class': 'form-control custom-input'}}) }}
-
+                    <label for="exampleInputEmail">Email</label>
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control custom-input'}}) }}
+                    {% if form_errors(form.email) %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(form.email) }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputNum">Num</label>
+                    {{ form_widget(form.num, {'attr': {'class': 'form-control custom-input'}}) }}
+                    {% if form_errors(form.num) %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(form.num) }}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputImages">Images</label>
+                    {{ form_widget(form.images, {'attr': {'class': 'form-control custom-input'}, 'multiple': true}) }}
+                    {% if form_errors(form.images) %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(form.images) }}
+                        </div>
+                    {% endif %}
                 </div>
                 <button class="btn btn-primary mr-2">Submit</button>
                 {{ form_end(form) }}

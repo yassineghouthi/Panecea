@@ -69,7 +69,7 @@
                                     </tr>
                                     <tr>
                                         <th>NombreLitDisponible</th>
-                                        <td>{{ urgence.NombreLitDisponible }}</td>
+                                        <td>{{ placeDispo }}</td>
                                     </tr>
 
                                     </tbody>
@@ -101,7 +101,7 @@
         var carousels = document.querySelectorAll('.carousel');
         carousels.forEach(function(carousel) {
             new bootstrap.Carousel(carousel, {
-                interval: 3000, // Change slide every 3 seconds
+                interval: 2000, // Change slide every 3 seconds
                 wrap: true
             });
         });

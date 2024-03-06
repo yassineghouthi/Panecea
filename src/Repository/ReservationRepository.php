@@ -36,13 +36,23 @@ class ReservationRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Reservation
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+
+
+    public function countReservationsForTodayByUrgence($urgenceId): int
+    {
+        $today = new \DateTime('today');
+        $todayFormatted = $today->format('Y-m-d');
+        $tomorrowFormatted = $today->modify('+1 day')->format('Y-m-d');
+
+        return $this->createQueryBuilder('r')
+            ->select('COUNT(r.id)')
+            ->andWhere('r.Date >= :today')
+            ->andWhere('r.Date < :tomorrow')
+            ->andWhere('r.Urgence = :urgenceId')
+            ->setParameter('today', $todayFormatted)
+            ->setParameter('tomorrow', $tomorrowFormatted)
+            ->setParameter('urgenceId', $urgenceId)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

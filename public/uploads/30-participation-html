@@ -1,0 +1,19 @@
+<h1>Reservation</h1>
+
+<table class="table">
+    <tbody>
+    <tr>
+        <th>Id</th>
+        <td>30</td>
+    </tr>
+    <tr>
+        <th>Description</th>
+        <td>yassisijne</td>
+    </tr>
+    <tr>
+        <th>Date</th>
+        <td>2024-03-06 10:36:27</td>
+    </tr>
+
+    </tbody>
+</table>

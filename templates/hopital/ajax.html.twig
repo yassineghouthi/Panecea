@@ -1,0 +1,55 @@
+<div class="row">
+    {% for hopital in hopitals %}
+        {% set hasEmergency = false %}
+        {% for urgence in urgences %}
+            {% if urgence.hopital == hopital %}
+                {% set hasEmergency = true %}
+            {% endif %}
+        {% endfor %}
+        <div class="col-md-6 mb-4">
+            <div class="card border-black"> <!-- Added border-black class -->
+                <div id="carousel_{{ hopital.id }}" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for key, image in hopital.hopitalImages %}
+                            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                <img src="{{ asset(image.ImageUrl) }}" class="card-img-top" alt="...">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel_{{ hopital.id }}" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel_{{ hopital.id }}" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+
+                </div>
+                <div class="card-body">
+                    <h2 class="card-title">
+                        <i class="bi bi-hospital"></i> <!-- Icon for hospital -->
+                        {{ hopital.Nom }}
+                    </h2>
+                    <p class="card-text">
+                        <i class="bi bi-geo-alt"></i> <!-- Icon for location -->
+                        {{ hopital.Localisation }} <br>
+                        {% if hasEmergency %}
+                            <span class="emergency-icon"><i class="bi bi-exclamation-triangle-fill"></i> Urgence </span> <!-- Emergency icon -->
+                        {% endif %}
+
+                    </p>
+                    <div class="btn-group">
+                        <a href="{{ path('app_hopital_show', {'id': hopital.id}) }}" class="btn btn-info">Show Details</a>
+                        <a href="{{ path('app_hopital_edit', {'id': hopital.id}) }}" class="btn btn-secondary">Edit</a>
+                        <form method="post" action="{{ path('app_hopital_delete', {'id': hopital.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ hopital.id) }}">
+                            <button class="btn btn-primary">Delete</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

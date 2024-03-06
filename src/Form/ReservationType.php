@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -22,6 +24,18 @@ class ReservationType extends AbstractType
                     new Length([
                         'min' => 5,
                         'minMessage' => 'La description doit contenir au moins {{ limit }} caractères',
+                    ]),
+                ],
+            ])->add('Etat', ChoiceType::class, [
+                'choices' => [
+                    'grave' => 'grave',
+                    'normale' => 'normale',
+                ],
+                'placeholder' => 'Choisir un état',
+                'constraints' => [
+                    new Choice([
+                        'choices' => ['grave', 'normale'],
+                        'message' => 'Veuillez sélectionner un état valide.',
                     ]),
                 ],
             ])

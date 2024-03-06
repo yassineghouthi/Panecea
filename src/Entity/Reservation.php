@@ -26,6 +26,9 @@ class Reservation
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $Date = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $etat = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,5 +80,17 @@ class Reservation
         $this->Date = $Date;
 
         return $this ;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): static
+    {
+        $this->etat = $etat;
+
+        return $this;
     }
 }

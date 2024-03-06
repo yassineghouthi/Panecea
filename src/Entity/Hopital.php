@@ -24,6 +24,12 @@ class Hopital
     #[ORM\OneToMany(targetEntity: HopitalImage::class, mappedBy: 'Hopital')]
     private Collection $hopitalImages;
 
+    #[ORM\Column(length: 255)]
+    private ?string $Email = null;
+
+    #[ORM\Column]
+    private ?int $Num = null;
+
     public function __construct()
     {
         $this->hopitalImages = new ArrayCollection();
@@ -84,6 +90,30 @@ class Hopital
                 $hopitalImage->setHopital(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->Email;
+    }
+
+    public function setEmail(string $Email): static
+    {
+        $this->Email = $Email;
+
+        return $this;
+    }
+
+    public function getNum(): ?int
+    {
+        return $this->Num;
+    }
+
+    public function setNum(int $Num): static
+    {
+        $this->Num = $Num;
 
         return $this;
     }

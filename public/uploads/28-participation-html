@@ -1,0 +1,19 @@
+<h1>Reservation</h1>
+
+<table class="table">
+    <tbody>
+    <tr>
+        <th>Id</th>
+        <td>28</td>
+    </tr>
+    <tr>
+        <th>Description</th>
+        <td>kjjddjjd</td>
+    </tr>
+    <tr>
+        <th>Date</th>
+        <td>2024-03-06 10:33:15</td>
+    </tr>
+
+    </tbody>
+</table>

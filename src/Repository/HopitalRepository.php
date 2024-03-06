@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Hopital;
+use App\Entity\Reservation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -45,4 +46,14 @@ class HopitalRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findByNom($value): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.Nom LIKE :val')
+            ->setParameter('val', '%' . $value . '%')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

@@ -5,7 +5,10 @@ namespace App\Controller;
 use App\Entity\Hopital;
 use App\Entity\HopitalImage;
 use App\Form\HopitalType;
+use App\Repository\EvenementRepository;
 use App\Repository\HopitalRepository;
+use App\Repository\ImagesRepository;
+use App\Repository\ReservationRepository;
 use App\Repository\UrgenceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -78,22 +81,28 @@ class HopitalController extends AbstractController
     }
 
     #[Route('/show/{id}', name: 'app_hopital_show', methods: ['GET'])]
-    public function show(Hopital $hopital,UrgenceRepository $urgenceRepository): Response
+    public function show(Hopital $hopital,UrgenceRepository $urgenceRepository,ReservationRepository $reservationRepository): Response
     {
         $urgence = $urgenceRepository->findByHopital($hopital->getId());
+        $todayReservationCount = $reservationRepository->countReservationsForTodayByUrgence($urgence->getId());
+        $total = $urgence->getNombreLitDisponible() - $todayReservationCount ;
         return $this->render('hopital/show.html.twig', [
             'hopital' => $hopital,
             'urgence' => $urgence,
+            'total' => $total
         ]);
     }
 
     #[Route('/User/{id}', name: 'app_hopital_show_user', methods: ['GET'])]
-    public function showUser(Hopital $hopital,UrgenceRepository $urgenceRepository): Response
+    public function showUser(Hopital $hopital,UrgenceRepository $urgenceRepository,ReservationRepository $reservationRepository): Response
     {
         $urgence = $urgenceRepository->findByHopital($hopital->getId());
+        $todayReservationCount = $reservationRepository->countReservationsForTodayByUrgence($urgence->getId());
+        $total = $urgence->getNombreLitDisponible() - $todayReservationCount ;
         return $this->render('hopital/showUser.html.twig', [
             'hopital' => $hopital,
             'urgence' => $urgence,
+            'total' => $total
         ]);
     }
 
@@ -127,5 +136,25 @@ class HopitalController extends AbstractController
         }
 
         return $this->redirectToRoute('app_hopital_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/search/ajax', name: 'app_ajax_hopital', methods: ['GET'])]
+    public function ajaxHopital(Request $request,HopitalRepository $hopitalRepository,UrgenceRepository $urgenceRepository): Response
+    {
+        $requestString=$request->get('searchValue');
+        return $this->render('hopital/ajax.html.twig', [
+            'hopitals' => $hopitalRepository->findByNom($requestString),
+            'urgences' => $urgenceRepository->findAll()
+        ]);
+    }
+
+    #[Route('/search/User/ajax', name: 'app_ajax_hopital_user', methods: ['GET'])]
+    public function ajaxHopitalUser(Request $request,HopitalRepository $hopitalRepository,UrgenceRepository $urgenceRepository): Response
+    {
+        $requestString=$request->get('searchValue');
+        return $this->render('hopital/ajaxUser.html.twig', [
+            'hopitals' => $hopitalRepository->findByNom($requestString),
+            'urgences' => $urgenceRepository->findAll()
+        ]);
     }
 }

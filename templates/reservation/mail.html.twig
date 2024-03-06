@@ -1,0 +1,19 @@
+<h1>Reservation</h1>
+
+<table class="table">
+    <tbody>
+    <tr>
+        <th>Id</th>
+        <td>{{ reservation.id }}</td>
+    </tr>
+    <tr>
+        <th>Description</th>
+        <td>{{ reservation.Description }}</td>
+    </tr>
+    <tr>
+        <th>Date</th>
+        <td>{{ reservation.Date ? reservation.Date|date('Y-m-d H:i:s') : '' }}</td>
+    </tr>
+
+    </tbody>
+</table>
